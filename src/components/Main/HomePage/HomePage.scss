@@ -1,0 +1,11 @@
+.section {
+	max-width: 1140px;
+	padding: 0 15px;
+	margin: auto;
+
+	&__coins-list {
+		display: grid;
+		gap: 2%;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+}

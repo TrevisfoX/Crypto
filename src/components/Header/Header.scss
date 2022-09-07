@@ -1,0 +1,25 @@
+.header {
+	max-width: 1140px;
+	padding: 30px 15px;
+	margin: auto;
+
+	.nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		padding: 30px 0;
+		border-radius: 20px;
+		background-color: rgb(129, 118, 255);
+
+		&__list {
+			display: flex;
+			list-style-type: none;
+			gap: 50px;
+		}
+
+		&__link {
+			color: white;
+			text-decoration: none;
+		}
+	}
+}
