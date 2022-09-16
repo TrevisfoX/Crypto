@@ -1,6 +1,5 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Col, Row, Typography } from "antd";
 import {
 	Chart,
 	LineController,
@@ -9,8 +8,13 @@ import {
 	LinearScale,
 	CategoryScale,
 } from "chart.js";
-
-const { Title } = Typography;
+import {
+	TableCell,
+	TableContainer,
+	TableRow,
+	Typography,
+	Table,
+} from "@mui/material";
 
 const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 	Chart.register(
@@ -22,11 +26,9 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 	);
 	const coinPrice = [];
 	const coinTimestamp = [];
-
 	for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
 		coinPrice.push(coinHistory?.data?.history[i].price);
 	}
-
 	for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
 		coinTimestamp.push(
 			//Incorrect time data in API
@@ -36,7 +38,6 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 			new Date().toLocaleDateString()
 		);
 	}
-
 	const data = {
 		labels: coinTimestamp,
 		datasets: [
@@ -49,7 +50,6 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 			},
 		],
 	};
-
 	const options = {
 		scales: {
 			y: [
@@ -64,19 +64,21 @@ const LineChart = ({ coinHistory, currentPrice, coinName }) => {
 
 	return (
 		<>
-			<Row className="chart-header">
-				<Title level={2} className="chart-title">
-					{coinName} Price Chart{" "}
-				</Title>
-				<Col className="price-container">
-					<Title level={5} className="price-change">
-						Change: {coinHistory?.data?.change}%
-					</Title>
-					<Title level={5} className="current-price">
-						Current {coinName} Price: $ {currentPrice}
-					</Title>
-				</Col>
-			</Row>
+			<TableContainer>
+				<Table>
+					<TableRow>
+						<Typography>{coinName} Price Chart </Typography>
+						<TableCell>
+							<Typography>
+								Change: {coinHistory?.data?.change}%
+							</Typography>
+							<Typography>
+								Current {coinName} Price: $ {currentPrice}
+							</Typography>
+						</TableCell>
+					</TableRow>
+				</Table>
+			</TableContainer>
 			<Line data={data} options={options} />
 		</>
 	);

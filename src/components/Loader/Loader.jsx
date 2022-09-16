@@ -1,9 +1,8 @@
 import React from "react";
-import { Spin } from "antd";
 
 const Loader = () => (
 	<div className="loader">
-		<Spin />
+		<h1>Loading</h1>
 	</div>
 );
 
