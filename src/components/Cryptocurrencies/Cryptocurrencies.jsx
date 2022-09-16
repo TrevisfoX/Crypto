@@ -37,7 +37,7 @@ const Cryptocurrencies = ({ simplified }) => {
 				<Box
 					component="form"
 					sx={{
-						"& > :not(style)": { my: 3, width: "50%" },
+						"& > :not(style)": { my: 3, width: "31%" },
 					}}
 					noValidate
 				>

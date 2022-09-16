@@ -23,14 +23,14 @@ const Hompage = () => {
 			<TableContainer>
 				<Typography
 					sx={{
-						my: 4,
+						my: 6,
 						fontSize: 36,
 						fontWeight: "bold",
 						textAlign: "center",
 					}}
 					component="h1"
 				>
-					Global Crypto Stats
+					Global crypto stats
 				</Typography>
 				<Table>
 					<TableHead>
@@ -126,28 +126,28 @@ const Hompage = () => {
 			<div>
 				<Typography
 					sx={{
-						my: 4,
+						my: 6,
 						fontSize: 36,
 						fontWeight: "bold",
 						textAlign: "center",
 					}}
 					component="h1"
 				>
-					Top 12 Cryptocurrencues in the world
+					Top 12 Cryptocurrencues in the World
 				</Typography>
 			</div>
 			<Cryptocurrencies simplified />
 			<div className="home-heading-container">
 				<Typography
 					sx={{
-						my: 4,
+						my: 6,
 						fontSize: 36,
 						fontWeight: "bold",
 						textAlign: "center",
 					}}
 					component="h1"
 				>
-					Laters Crypto News
+					News
 				</Typography>
 			</div>
 			<News simplified />

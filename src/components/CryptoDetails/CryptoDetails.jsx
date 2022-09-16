@@ -1,40 +1,23 @@
 import React, { useState } from "react";
-import HTMLReactParser from "html-react-parser";
 import { useParams } from "react-router-dom";
+import HTMLReactParser from "html-react-parser";
 import millify from "millify";
-import { Row, Col } from "antd";
-import {
-	MoneyCollectOutlined,
-	DollarCircleOutlined,
-	FundOutlined,
-	ExclamationCircleOutlined,
-	StopOutlined,
-	TrophyOutlined,
-	CheckOutlined,
-	NumberOutlined,
-	ThunderboltOutlined,
-} from "@ant-design/icons";
-import {
-	useGetCryptoDetailsQuery,
-	useGetCryptoHistoryQuery,
-} from "../../services/cryptoApi";
-import LineChart from "../Chart/LineChart";
-import Loader from "../Loader/Loader";
 import {
 	Box,
 	FormControl,
 	InputLabel,
 	MenuItem,
 	Select,
-	Table,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TableRow,
 	Typography,
+	Grid,
 } from "@mui/material";
-// const { Title, Text } = Typography;
-// const { Option } = Select;
+
+import {
+	useGetCryptoDetailsQuery,
+	useGetCryptoHistoryQuery,
+} from "../../services/cryptoApi";
+import LineChart from "../Chart/LineChart";
+import Loader from "../Loader/Loader";
 
 const CryptoDetails = () => {
 	const { coinId } = useParams();
@@ -48,76 +31,8 @@ const CryptoDetails = () => {
 
 	const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
-	const stats = [
-		{
-			title: "Price to USD",
-			value: `$ ${cryptoDetails?.price && millify(cryptoDetails?.price)}`,
-			icon: <DollarCircleOutlined />,
-		},
-		{ title: "Rank", value: cryptoDetails?.rank, icon: <NumberOutlined /> },
-		{
-			title: "24h Volume",
-			value: `$ ${
-				cryptoDetails?.volume && millify(cryptoDetails?.volume)
-			}`,
-			icon: <ThunderboltOutlined />,
-		},
-		{
-			title: "Market Cap",
-			value: `$ ${
-				cryptoDetails?.marketCap && millify(cryptoDetails?.marketCap)
-			}`,
-			icon: <DollarCircleOutlined />,
-		},
-		{
-			title: "All-time-high(daily avg.)",
-			value: `$ ${
-				cryptoDetails?.allTimeHigh?.price &&
-				millify(cryptoDetails?.allTimeHigh?.price)
-			}`,
-			icon: <TrophyOutlined />,
-		},
-	];
-
-	const genericStats = [
-		{
-			title: "Number Of Markets",
-			value: cryptoDetails?.numberOfMarkets,
-			icon: <FundOutlined />,
-		},
-		{
-			title: "Number Of Exchanges",
-			value: cryptoDetails?.numberOfExchanges,
-			icon: <MoneyCollectOutlined />,
-		},
-		{
-			title: "Aprroved Supply",
-			value: cryptoDetails?.supply?.confirmed ? (
-				<CheckOutlined />
-			) : (
-				<StopOutlined />
-			),
-			icon: <ExclamationCircleOutlined />,
-		},
-		{
-			title: "Total Supply",
-			value: `$ ${
-				cryptoDetails?.supply?.total &&
-				millify(cryptoDetails?.supply?.total)
-			}`,
-			icon: <ExclamationCircleOutlined />,
-		},
-		{
-			title: "Circulating Supply",
-			value: `$ ${
-				cryptoDetails?.supply?.circulating &&
-				millify(cryptoDetails?.supply?.circulating)
-			}`,
-			icon: <ExclamationCircleOutlined />,
-		},
-	];
-
 	if (isFetching) return <Loader />;
+	console.log(cryptoDetails);
 
 	return (
 		<>
@@ -163,102 +78,94 @@ const CryptoDetails = () => {
 					coinName={cryptoDetails?.name}
 				/>
 			</Box>
-
-			<TableContainer>
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableCell>
-								{cryptoDetails.name} Value Statistics
-							</TableCell>
-							{stats.map(({ icon, title, value }) => {
-								return (
-									<TableCell>
-										{icon} {title}{" "}
-										{value === "$ undefined" ? (
-											"no data available"
-										) : (
-											<p className="stats">{value}</p>
-										)}
-									</TableCell>
-								);
-							})}
-						</TableRow>
-					</TableHead>
-				</Table>
-			</TableContainer>
-
-			<Col className="stats-container">
-				<Col className="coin-value-statistics">
-					<Col className="coin-value-statistics-heading">
-						<h3 level={3} className="coin-details-heading">
-							{cryptoDetails.name} Value Statistics
-						</h3>
-						<p>
-							An overview showing the statistics of{" "}
-							{cryptoDetails.name}, such as the base and quote
-							currency, the rank, and trading volume.
-						</p>
-					</Col>
-					{stats.map(({ icon, title, value }) => (
-						<Col className="coin-stats">
-							<Col className="coin-stats-name">
-								<p>{icon}</p>
-								<p>{title}</p>
-							</Col>
-							{value === "$ undefined" ? (
-								"no data available"
-							) : (
-								<p className="stats">{value}</p>
-							)}
-						</Col>
-					))}
-				</Col>
-				<Col className="other-stats-info">
-					<Col className="coin-value-statistics-heading">
-						<h3 level={3} className="coin-details-heading">
-							Other Stats Info
-						</h3>
-						<p>
-							An overview showing the statistics of{" "}
-							{cryptoDetails.name}, such as the base and quote
-							currency, the rank, and trading volume.
-						</p>
-					</Col>
-					{genericStats.map(({ icon, title, value }) => (
-						<Col className="coin-stats">
-							<Col className="coin-stats-name">
-								<p>{icon}</p>
-								<p>{title}</p>
-							</Col>
-							<p className="stats">{value}</p>
-						</Col>
-					))}
-				</Col>
-			</Col>
-			<Col className="coin-desc-link">
-				<Row className="coin-desc">
-					<h3 level={3} className="coin-details-heading">
-						What is {cryptoDetails.name}?
-					</h3>
+			<Box>
+				<Typography
+					sx={{
+						textAlign: "center",
+						my: 4,
+						fontSize: 28,
+						fontWeight: "bold",
+					}}
+				>
+					{cryptoDetails.name} base statistics
+				</Typography>
+				<Typography>Price to USD: {cryptoDetails.price}</Typography>
+				<Typography>Rank: {cryptoDetails.rank}</Typography>
+				<Typography>
+					24h Volume:{" "}
+					{cryptoDetails.volume
+						? cryptoDetails.volume
+						: "no data available"}
+				</Typography>
+				<Typography>Market Cap: {cryptoDetails.marketCap}</Typography>
+				<Typography>
+					All-time-high: {cryptoDetails.allTimeHigh.price}
+				</Typography>
+			</Box>
+			<Box>
+				<Typography
+					sx={{
+						textAlign: "center",
+						my: 4,
+						fontSize: 28,
+						fontWeight: "bold",
+					}}
+				>
+					Other stats info
+				</Typography>
+				<Typography>
+					Number Of Markets: {cryptoDetails.numberOfMarkets}
+				</Typography>
+				<Typography>
+					Number Of Exchanges: {cryptoDetails.numberOfExchanges}
+				</Typography>
+				<Typography>
+					Total Supply: {cryptoDetails.supply.total}
+				</Typography>
+				<Typography>
+					Circulating Supply: {cryptoDetails.supply.circulating}
+				</Typography>
+			</Box>
+			<Box>
+				<Typography
+					sx={{
+						textAlign: "center",
+						fontSize: 28,
+						fontWeight: "bold",
+						my: 3,
+					}}
+				>
+					What is {cryptoDetails.name}?
+				</Typography>
+				<Typography>
 					{HTMLReactParser(cryptoDetails.description)}
-				</Row>
-				<Col className="coin-links">
-					<h3 level={3} className="coin-details-heading">
-						{cryptoDetails.name} Links
-					</h3>
+				</Typography>
+			</Box>
+			<Box
+				sx={{
+					textAlign: "center",
+					pb: 5,
+				}}
+			>
+				<Typography
+					sx={{
+						textAlign: "center",
+						fontSize: 28,
+						fontWeight: "bold",
+						my: 3,
+					}}
+				>
+					{cryptoDetails.name} links
+				</Typography>
+				<Grid container spacing={3}>
 					{cryptoDetails.links?.map((link) => (
-						<Row className="coin-link" key={link.name}>
-							<h3 level={5} className="link-name">
-								{link.type}
-							</h3>
-							<a href={link.url} target="_blank" rel="noreferrer">
-								{link.name}
-							</a>
-						</Row>
+						<Grid item key={link.name} md={4}>
+							<Typography>{link.type}</Typography>
+							<a href={link.url}>{link.name}</a>
+						</Grid>
 					))}
-				</Col>
-			</Col>
+				</Grid>
+			</Box>
 		</>
 	);
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.scss";
 import { Route, Routes } from "react-router-dom";
 import { Container } from "@mui/system";
 import Navbar from "./components/Navigation/Navbar";
@@ -17,24 +16,22 @@ function App() {
 			</header>
 			<main>
 				<Container>
-					<div className="rotes">
-						<Routes>
-							<Route path="/" element={<Homepage />}></Route>
-							<Route
-								path="/favorites"
-								element={<Favorites />}
-							></Route>
-							<Route
-								path="/cryptocurrencies"
-								element={<Cryptocurrencies />}
-							></Route>
-							<Route
-								path="/crypto/:coinId"
-								element={<CryptoDetails />}
-							></Route>
-							<Route path="/news" element={<News />}></Route>
-						</Routes>
-					</div>
+					<Routes>
+						<Route path="/" element={<Homepage />}></Route>
+						<Route
+							path="/favorites"
+							element={<Favorites />}
+						></Route>
+						<Route
+							path="/cryptocurrencies"
+							element={<Cryptocurrencies />}
+						></Route>
+						<Route
+							path="/crypto/:coinId"
+							element={<CryptoDetails />}
+						></Route>
+						<Route path="/news" element={<News />}></Route>
+					</Routes>
 				</Container>
 			</main>
 		</div>

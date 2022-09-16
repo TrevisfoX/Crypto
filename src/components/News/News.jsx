@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import moment from "moment/moment";
-import { useGetCryptoNewsQuery } from "../../services/cryptoNewsApi";
-import { useGetCryptosQuery } from "../../services/cryptoApi";
-import demoImage from "../../assets/image/th.jpg";
-import Loader from "../Loader/Loader";
 import {
 	CardActions,
 	CardContent,
@@ -18,6 +14,11 @@ import {
 	IconButton,
 } from "@mui/material";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
+
+import { useGetCryptoNewsQuery } from "../../services/cryptoNewsApi";
+import { useGetCryptosQuery } from "../../services/cryptoApi";
+import demoImage from "../../assets/image/th.jpg";
+import Loader from "../Loader/Loader";
 
 const News = ({ simplified }) => {
 	const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
@@ -75,7 +76,13 @@ const News = ({ simplified }) => {
 				// 	</Select>
 				// </Col>
 			)}
-			<Grid container spacing={5}>
+			<Grid
+				container
+				spacing={5}
+				sx={{
+					pb: 6,
+				}}
+			>
 				{cryptoNews.value.map((news, i) => (
 					<Grid item md={12}>
 						<Card hoverable className="news-card">
@@ -107,7 +114,6 @@ const News = ({ simplified }) => {
 										}
 										alt="green iguana"
 									/>
-
 									<Typography
 										sx={{
 											ml: 2,
