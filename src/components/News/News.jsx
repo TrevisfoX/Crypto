@@ -83,9 +83,9 @@ const News = ({ simplified }) => {
 					pb: 6,
 				}}
 			>
-				{cryptoNews.value.map((news, i) => (
-					<Grid item md={12}>
-						<Card hoverable className="news-card">
+				{cryptoNews.value.map((news) => (
+					<Grid item md={12} key={news.name}>
+						<Card hoverable="true">
 							<CardContent>
 								<Typography
 									sx={{

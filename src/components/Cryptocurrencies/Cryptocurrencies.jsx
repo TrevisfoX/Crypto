@@ -19,8 +19,14 @@ import ReadMoreIcon from "@mui/icons-material/ReadMore";
 const Cryptocurrencies = ({ simplified }) => {
 	const count = simplified ? 12 : 100;
 	const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
+	console.log(isFetching);
 	const [cryptos, setCryptos] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
+	// const [favorites, setFavorites] = useState(
+	// 	localStorage.getItem("favorites")
+	// 		? JSON.parse(localStorage.getItem("favorites"))
+	// 		: []
+	// );
 
 	useEffect(() => {
 		const filteredData = cryptosList?.data?.coins.filter((coin) =>
@@ -28,6 +34,11 @@ const Cryptocurrencies = ({ simplified }) => {
 		);
 		setCryptos(filteredData);
 	}, [cryptosList, searchTerm]);
+
+	// const handleMarkToFavorite = (newTodos) => {
+	// 	setFavorites(newTodos);
+	// 	localStorage.setItem("favorites", JSON.stringify(newTodos));
+	// };
 
 	if (isFetching) return <Loader />;
 
@@ -51,10 +62,9 @@ const Cryptocurrencies = ({ simplified }) => {
 			)}
 
 			<Grid container spacing={5}>
-				{cryptos?.map((currency) => (
-					<Grid item md={4}>
+				{cryptos?.map((currency, index) => (
+					<Grid item md={4} key={index}>
 						<Card
-							key={currency.uuid}
 							sx={{
 								minHeight: 255,
 							}}
@@ -135,15 +145,13 @@ const Cryptocurrencies = ({ simplified }) => {
 									bgcolor: "#1976d2",
 								}}
 							>
-								<Link to={""}>
-									<IconButton
-										sx={{
-											color: "white",
-										}}
-									>
-										<AddIcon />
-									</IconButton>
-								</Link>
+								<IconButton
+									sx={{
+										color: "white",
+									}}
+								>
+									<AddIcon />
+								</IconButton>
 								<Link to={`/crypto/${currency.uuid}`}>
 									<IconButton
 										sx={{
