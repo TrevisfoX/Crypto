@@ -28,11 +28,9 @@ const CryptoDetails = () => {
 		timePeriod,
 	});
 	const cryptoDetails = data?.data?.coin;
-
 	const time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"];
 
 	if (isFetching) return <Loader />;
-	console.log(cryptoDetails);
 
 	return (
 		<>
@@ -48,30 +46,15 @@ const CryptoDetails = () => {
 					{cryptoDetails.name} ({cryptoDetails.symbol}) Price
 				</Typography>
 
-				<FormControl
-					variant="standard"
-					sx={{
-						width: "25%",
-					}}
+				<Select
+					value={timePeriod}
+					onChange={(e) => setTimePeriod(e.target.value)}
 				>
-					<InputLabel
-						sx={{
-							fontSize: 18,
-						}}
-					>
-						Select a time interval
-					</InputLabel>
-					<Select
-						className="select-timeperiod"
-						placeholder="Select time period"
-						defaultValue="7d"
-						onChange={(value) => setTimePeriod(value)}
-					>
-						{time.map((value) => {
-							return <MenuItem key={value}>{value}</MenuItem>;
-						})}
-					</Select>
-				</FormControl>
+					{time.map((date) => (
+						<MenuItem key={date}>{date}</MenuItem>
+					))}
+				</Select>
+
 				<LineChart
 					coinHistory={coinHistory}
 					currentPrice={millify(cryptoDetails?.price)}
@@ -93,9 +76,11 @@ const CryptoDetails = () => {
 				<Typography>Rank: {cryptoDetails.rank}</Typography>
 				<Typography>
 					24h Volume:{" "}
-					{cryptoDetails.volume
-						? cryptoDetails.volume
-						: "no data available"}
+					{cryptoDetails.volume ? (
+						cryptoDetails.volume
+					) : (
+						<em>no data available</em>
+					)}
 				</Typography>
 				<Typography>Market Cap: {cryptoDetails.marketCap}</Typography>
 				<Typography>

@@ -4,9 +4,9 @@ import { Container } from "@mui/system";
 import Navbar from "./components/Navigation/Navbar";
 import Homepage from "./components/Homepage/Hompage";
 import Favorites from "./components/Favorites/Favorites";
-import Cryptocurrencies from "./components/Cryptocurrencies/Cryptocurrencies";
 import CryptoDetails from "./components/CryptoDetails/CryptoDetails";
-import News from "./components/News/News";
+import NewsList from "./components/NewsList/NewsList";
+import CoinList from "./components/CoinList/CoinList";
 
 function App() {
 	return (
@@ -24,13 +24,13 @@ function App() {
 						></Route>
 						<Route
 							path="/cryptocurrencies"
-							element={<Cryptocurrencies />}
+							element={<CoinList />}
 						></Route>
 						<Route
 							path="/crypto/:coinId"
 							element={<CryptoDetails />}
 						></Route>
-						<Route path="/news" element={<News />}></Route>
+						<Route path="/news" element={<NewsList />}></Route>
 					</Routes>
 				</Container>
 			</main>

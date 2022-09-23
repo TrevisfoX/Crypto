@@ -6,8 +6,15 @@ import NewspaperOutlinedIcon from "@mui/icons-material/NewspaperOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import BusinessCenterOutlinedIcon from "@mui/icons-material/BusinessCenterOutlined";
 import LoginIcon from "@mui/icons-material/Login";
+import { useState } from "react";
+import ModalWindow from "../Modal/Modal";
 
 const Navbar = () => {
+	const [open, setOpen] = useState(false);
+
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
 	return (
 		<AppBar
 			position="static"
@@ -58,7 +65,7 @@ const Navbar = () => {
 						/>
 					</IconButton>
 				</Link>
-				<IconButton>
+				<IconButton onClick={handleOpen}>
 					<LoginIcon
 						sx={{
 							color: "white",
@@ -66,6 +73,11 @@ const Navbar = () => {
 					/>
 				</IconButton>
 			</Container>
+			<ModalWindow
+				open={open}
+				setOpen={setOpen}
+				handleClose={handleClose}
+			/>
 		</AppBar>
 	);
 };
