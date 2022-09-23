@@ -1,8 +1,8 @@
 import React from "react";
 import millify from "millify";
 import { useGetCryptosQuery } from "../../services/cryptoApi";
-import Cryptocurrencies from "../Cryptocurrencies/Cryptocurrencies";
-import News from "../News/News";
+import CoinList from "../CoinList/CoinList";
+import NewsList from "../NewsList/NewsList";
 import Loader from "../Loader/Loader";
 import {
 	Table,
@@ -17,7 +17,9 @@ import {
 const Hompage = () => {
 	const { data, isFetching } = useGetCryptosQuery(12);
 	const globalStats = data?.data?.stats;
+
 	if (isFetching) return <Loader />;
+
 	return (
 		<>
 			<TableContainer>
@@ -136,7 +138,7 @@ const Hompage = () => {
 					Top 12 Cryptocurrencues in the World
 				</Typography>
 			</div>
-			<Cryptocurrencies simplified />
+			<CoinList simplified />
 			<div className="home-heading-container">
 				<Typography
 					sx={{
@@ -150,7 +152,7 @@ const Hompage = () => {
 					News
 				</Typography>
 			</div>
-			<News simplified />
+			<NewsList simplified />
 		</>
 	);
 };
